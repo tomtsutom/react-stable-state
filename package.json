@@ -1,0 +1,33 @@
+{
+  "name": "react-stable-state",
+  "version": "0.0.9",
+  "description": "react-stable-state",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "homepage": "https://github.com/tomtsutom/react-stable-state",
+  "module": "dist/es6/index.js",
+  "main": "dist/commonjs/index.js",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "author": "tomtsutom",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@types/react": "^18.0.0",
+    "react": "^18.0.0",
+    "rollup": "^2.70.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}
