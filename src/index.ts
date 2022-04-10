@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 export type UseStableStateProps<T> = {
   initialState: T;
   delay?: number;
+  load?: () => Promise<T>;
+  onStableStateChanged?: () => Promise<void>;
 };
 export type UseStableStateReturnType<T> = [
   T,
@@ -28,6 +30,18 @@ function useStableStateExtra<T>(
   const [saveTrigger, setSaveTrigger] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [delay, setDelay] = useState(options.delay || 1000);
+  const isLoaded = useRef(false);
+  const isInitialChange = useRef(true);
+
+  useEffect(() => {
+    if (!isLoaded.current) {
+      (async () => {
+        if (options.load) setState(await options.load());
+        isInitialChange.current = true;
+        isLoaded.current = true;
+      })();
+    }
+  }, [setState]);
 
   useEffect(() => {
     if (editCount > 0) {
@@ -52,6 +66,13 @@ function useStableStateExtra<T>(
       setIsEditing(false);
     }
   }, [saveTrigger]);
+
+  useEffect(() => {
+    if (!isInitialChange.current && options.onStableStateChanged) {
+      options.onStableStateChanged();
+    }
+    isInitialChange.current = false;
+  }, [stableState]);
 
   return { state, stableState, setState, isEditing, delay, setDelay } as const;
 }

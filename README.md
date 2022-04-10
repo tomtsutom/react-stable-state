@@ -52,3 +52,41 @@ const App = () => {
 };
 export default App;
 ```
+
+You can also store values to server by calling the Fetch API in the `onStableStateChanged` callback function.
+`onStableStateChanged` callback would not invoked when the state is changed by the `load` function
+
+```tsx
+import { useStableState } from "react-stable-state";
+
+const App = () => {
+  const [value, stableValue, setValue] = useStableState<string>({
+    initialState: "",
+    load: () =>
+      fetch("/data_store").then((resp) => resp.text()),
+    onStableStateChanged: () =>
+      fetch("/data_store", {
+        method: "POST",
+        body: JSON.stringify({ value: stableValue }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(),
+  });
+
+  return (
+    <div className="App" id="app">
+      <input
+        type="text"
+        id="text-input"
+        value={value}
+        onChange={(e) => {
+          e.preventDefault();
+          setValue(e.target.value);
+        }}
+      ></input>
+    </div>
+  );
+};
+export default App;
+```
