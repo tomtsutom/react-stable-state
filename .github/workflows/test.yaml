@@ -15,7 +15,3 @@ jobs:
         with:
           name: coverage
           path: coverage
-      - name: Generating coverage badges
-        uses: jpb06/jest-badges-action@latest
-        with:
-          branches: main
