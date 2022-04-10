@@ -1,6 +1,26 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-function useStableState<T>(options: { initialState: T; delay?: number }) {
+export type UseStableStateProps<T> = {
+  initialState: T;
+  delay?: number;
+};
+export type UseStableStateReturnType<T> = [
+  T,
+  T,
+  React.Dispatch<React.SetStateAction<T>>
+];
+export type UseStableStateExtraReturnType<T> = {
+  state: T;
+  stableState: T;
+  setState: React.Dispatch<React.SetStateAction<T>>;
+  isEditing: boolean;
+  delay: number;
+  setDelay: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function useStableStateExtra<T>(
+  options: UseStableStateProps<T>
+): UseStableStateExtraReturnType<T> {
   const [state, setState] = useState(options.initialState);
   const [stableState, setStableState] = useState(options.initialState);
   const lastEditTimeRef = useRef(new Date());
@@ -19,14 +39,11 @@ function useStableState<T>(options: { initialState: T; delay?: number }) {
 
   useEffect(() => {
     setTimeout(() => {
-      if (
-        new Date().getTime() - lastEditTimeRef.current.getTime() >=
-        delay
-      ) {
+      if (new Date().getTime() - lastEditTimeRef.current.getTime() >= delay) {
         setSaveTrigger(true);
       }
     }, delay);
-  }, [editCount, setEditCount, setSaveTrigger]);
+  }, [editCount, setSaveTrigger]);
 
   useEffect(() => {
     if (saveTrigger) {
@@ -39,5 +56,13 @@ function useStableState<T>(options: { initialState: T; delay?: number }) {
   return { state, stableState, setState, isEditing, delay, setDelay } as const;
 }
 
-export { useStableState };
-export default { useStableState };
+function useStableState<T>(
+  options: UseStableStateProps<T>
+): UseStableStateReturnType<T> {
+  const { state, stableState, setState } = useStableStateExtra(options);
+
+  return [state, stableState, setState];
+}
+
+export { useStableState, useStableStateExtra };
+export default { useStableState, useStableStateExtra };

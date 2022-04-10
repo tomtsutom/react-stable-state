@@ -3,7 +3,9 @@
   "version": "0.0.9",
   "description": "react-stable-state",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "homepage": "https://github.com/tomtsutom/react-stable-state",
   "module": "dist/es6/index.js",
@@ -20,10 +22,15 @@
     "@babel/preset-env": "^7.16.11",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-typescript": "^8.3.1",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/jest": "^27.4.1",
     "@types/react": "^18.0.0",
+    "jest": "^27.5.1",
     "react": "^18.0.0",
+    "react-test-renderer": "^18.0.0",
     "rollup": "^2.70.1",
     "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^27.1.4",
     "tslib": "^2.3.1",
     "typescript": "^4.6.3"
   },
