@@ -106,6 +106,47 @@ describe("useStableStateExtra", () => {
     });
   });
 
+  it("load callback is called when initialize", async () => {
+    await act(async () => {
+      renderHookResult = renderHook(() =>
+        useStableStateExtra<string>({
+          initialState: "",
+          load: async () => {
+            return "hoge";
+          },
+        })
+      );
+      result = renderHookResult.result;
+    });
+
+    expect(result.current.state).toBe("hoge");
+    await act(async () => {
+      jest.advanceTimersByTime(1000);
+    });
+    expect(result.current.stableState).toBe("hoge");
+  });
+
+  it("onStableStateChanged callback is called when state is changed", (done) => {
+    const onStableStateChangedCallback = async () => {
+      done();
+    };
+    renderHookResult = renderHook(() =>
+      useStableStateExtra<string>({
+        initialState: "",
+        onStableStateChanged: onStableStateChangedCallback,
+      })
+    );
+
+    result = renderHookResult.result;
+
+    act(() => {
+      result.current.setState("hoge");
+      jest.advanceTimersByTime(2000);
+    });
+
+    expect(result.current.stableState).toBe("hoge");
+  });
+
   it("no error when window will be closed", () => {
     window.dispatchEvent(new Event("beforeunload", { cancelable: true }));
   });
