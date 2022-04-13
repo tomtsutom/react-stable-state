@@ -15,6 +15,14 @@ jobs:
         with:
           name: coverage
           path: coverage
+      - run: npm i coverage-badges-cli -g
+      - run: coverage-badges --output public/coverage-badges.svg
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
   deploy:
     name: deploy
     runs-on: ubuntu-latest

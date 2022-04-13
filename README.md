@@ -1,5 +1,8 @@
 # react-stable-state
 
+[![ci](https://github.com/tomtsutom/react-stable-state/actions/workflows/ci.yaml/badge.svg)](https://github.com/tomtsutom/react-stable-state/actions/workflows/ci.yaml)
+[![Coverage Status](https://tomtsutom.github.io/react-stable-state/coverage-badges.svg)](https://tomtsutom.github.io/react-stable-state/coverage-badges.svg)
+
 A simple React Hooks for stable useState.
 
 This module was designed with the use case of saving data after a certain amount of time has elapsed after editing. By using `useStableState` instead of `useState`, the number of times to process can be greatly reduced.
