@@ -105,6 +105,25 @@ describe("useStableStateExtra", () => {
       expect(result.current.isEditing).toBe(false);
     });
   });
+
+  it("no error when window will be closed", () => {
+    window.dispatchEvent(new Event("beforeunload", { cancelable: true }));
+  });
+
+  it("onBeforeUnload callback is called when window will be closed", (done) => {
+    const onBeforeUnloadCallback = () => {
+      done();
+      return false;
+    };
+    renderHookResult = renderHook(() =>
+      useStableStateExtra<string>({
+        initialState: "",
+        onBeforeUnload: onBeforeUnloadCallback,
+      })
+    );
+
+    window.dispatchEvent(new Event("beforeunload", { cancelable: true }));
+  });
 });
 
 describe("useStableState", () => {

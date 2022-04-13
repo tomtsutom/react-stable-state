@@ -4,5 +4,6 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
+  testEnvironment: "jsdom",
   coverageReporters: ["json", "json-summary", "text", "lcov", "clover"],
 };

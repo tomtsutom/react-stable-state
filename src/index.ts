@@ -5,6 +5,10 @@ export type UseStableStateProps<T> = {
   delay?: number;
   load?: () => Promise<T>;
   onStableStateChanged?: () => Promise<void>;
+  onBeforeUnload?: (
+    params: UseStableStateExtraParams<T>,
+    event: BeforeUnloadEvent
+  ) => boolean | undefined;
 };
 export type UseStableStateParams<T> = [
   T,
@@ -32,6 +36,21 @@ function useStableStateExtra<T>(
   const [delay, setDelay] = useState(options.delay || 1000);
   const isLoaded = useRef(false);
   const isInitialChange = useRef(true);
+
+  window.onbeforeunload = (event) => {
+    if (!options.onBeforeUnload) return;
+    return options.onBeforeUnload(
+      {
+        state,
+        stableState,
+        setState,
+        isEditing,
+        delay,
+        setDelay,
+      },
+      event
+    );
+  };
 
   useEffect(() => {
     if (!isLoaded.current) {
