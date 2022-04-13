@@ -6,12 +6,12 @@ export type UseStableStateProps<T> = {
   load?: () => Promise<T>;
   onStableStateChanged?: () => Promise<void>;
 };
-export type UseStableStateReturnType<T> = [
+export type UseStableStateParams<T> = [
   T,
   T,
   React.Dispatch<React.SetStateAction<T>>
 ];
-export type UseStableStateExtraReturnType<T> = {
+export type UseStableStateExtraParams<T> = {
   state: T;
   stableState: T;
   setState: React.Dispatch<React.SetStateAction<T>>;
@@ -22,7 +22,7 @@ export type UseStableStateExtraReturnType<T> = {
 
 function useStableStateExtra<T>(
   options: UseStableStateProps<T>
-): UseStableStateExtraReturnType<T> {
+): UseStableStateExtraParams<T> {
   const [state, setState] = useState(options.initialState);
   const [stableState, setStableState] = useState(options.initialState);
   const lastEditTimeRef = useRef(new Date());
@@ -79,7 +79,7 @@ function useStableStateExtra<T>(
 
 function useStableState<T>(
   options: UseStableStateProps<T>
-): UseStableStateReturnType<T> {
+): UseStableStateParams<T> {
   const { state, stableState, setState } = useStableStateExtra(options);
 
   return [state, stableState, setState];

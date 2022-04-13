@@ -2,8 +2,8 @@ import {
   useStableState,
   useStableStateExtra,
   UseStableStateProps,
-  UseStableStateReturnType,
-  UseStableStateExtraReturnType,
+  UseStableStateParams,
+  UseStableStateExtraParams,
 } from "../src/index";
 import {
   RenderResult,
@@ -14,10 +14,10 @@ import {
 import React from "react";
 
 describe("useStableStateExtra", () => {
-  let result: RenderResult<UseStableStateExtraReturnType<string>>,
+  let result: RenderResult<UseStableStateExtraParams<string>>,
     renderHookResult: RenderHookResult<
       UseStableStateProps<string>,
-      UseStableStateExtraReturnType<string>
+      UseStableStateExtraParams<string>
     >;
 
   beforeEach(() => {
@@ -108,19 +108,19 @@ describe("useStableStateExtra", () => {
 });
 
 describe("useStableState", () => {
-  let result: RenderResult<UseStableStateReturnType<string>>,
+  let result: RenderResult<UseStableStateParams<string>>,
     renderHookResult: RenderHookResult<
       UseStableStateProps<string>,
-      UseStableStateReturnType<string>
+      UseStableStateParams<string>
     >,
     currentState: (
-      result: RenderResult<UseStableStateReturnType<string>>
+      result: RenderResult<UseStableStateParams<string>>
     ) => string,
     currentStableState: (
-      result: RenderResult<UseStableStateReturnType<string>>
+      result: RenderResult<UseStableStateParams<string>>
     ) => string,
     currentSetState: (
-      result: RenderResult<UseStableStateReturnType<string>>
+      result: RenderResult<UseStableStateParams<string>>
     ) => React.Dispatch<React.SetStateAction<string>>;
 
   beforeEach(() => {
