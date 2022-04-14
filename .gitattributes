@@ -1,3 +1,5 @@
 .bablerc.js linguist-detectable=false
 jest.config.js linguist-detectable=false
 rollup.config.js linguist-detectable=false
+package.json linguist-detectable=false
+tsconfig.json linguist-detectable=false
