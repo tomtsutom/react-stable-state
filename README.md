@@ -1,6 +1,6 @@
 # react-stable-state
 
-[![test](https://github.com/tomtsutom/react-stable-state/actions/workflows/test_and_deploy.yaml/badge.svg)](https://github.com/tomtsutom/react-stable-state/actions/workflows/test_and_deploy.yaml)
+[![test](https://github.com/tomtsutom/react-stable-state/actions/workflows/ci.yaml/badge.svg)](https://github.com/tomtsutom/react-stable-state/actions/workflows/ci.yaml)
 [![Coverage Status](https://tomtsutom.github.io/react-stable-state/coverage-badges.svg)](https://tomtsutom.github.io/react-stable-state/lcov-report)
 
 A simple React Hooks for stable useState.

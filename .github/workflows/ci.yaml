@@ -1,4 +1,4 @@
-name: test_and_deploy
+name: ci
 on: push
 jobs:
   test:
