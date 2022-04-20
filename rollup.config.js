@@ -7,9 +7,7 @@ import * as path from "path";
 
 import pkg from "./package.json";
 
-
 export default [
-  // For NPM
   {
     input: "src/index.ts",
     output: [
@@ -33,7 +31,6 @@ export default [
       terser(),
     ],
   },
-  // For ES6
   {
     input: "src/index.ts",
     output: {
