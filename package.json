@@ -1,6 +1,6 @@
 {
   "name": "react-stable-state",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "react-stable-state",
   "scripts": {
     "build": "rollup -c",
