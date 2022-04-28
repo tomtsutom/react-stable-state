@@ -33,7 +33,7 @@ function useStableStateExtra<T>(
   const [editCount, setEditCount] = useState(0);
   const [saveTrigger, setSaveTrigger] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [delay, setDelay] = useState(options.delay || 1000);
+  const [delay, setDelay] = useState(options.delay ?? 1000);
   const isLoaded = useRef(false);
   const isInitialChange = useRef(true);
 
